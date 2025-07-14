@@ -83,7 +83,7 @@ function Settings() {
       .finally(() => setIsLoading(false));
   }, [toggleNotification, notifyStatus]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const settings = {
@@ -277,16 +277,13 @@ function Settings() {
                       })}
                     </Typography>
                     <NumberInput
-                      onValueChange={(val) => setFrequencyInterval(val)}
+                      onValueChange={(val: any) => setFrequencyInterval(val)}
                       value={frequencyInterval}
                       disabled={!activated}
-                      error={
-                        formError?.['logAge.value'] &&
-                        formatMessage({
-                          id: getTrad('settings.box.logAge-input.error'),
-                          defaultMessage: 'Please enter a value greater than 1',
-                        })
-                      }
+                      error={formatMessage({
+                        id: getTrad('settings.box.logAge-input.error'),
+                        defaultMessage: 'Please enter a value greater than 1',
+                      })}
                       min="1"
                     />
                     <Select.Root
@@ -322,16 +319,13 @@ function Settings() {
                       })}
                     </Typography>
                     <NumberInput
-                      onValueChange={(val) => setFrequencyNumber(val)}
+                      onValueChange={(val: any) => setFrequencyNumber(val)}
                       value={frequencyNumber}
                       disabled={!activated}
-                      error={
-                        formError?.['logCount.value'] &&
-                        formatMessage({
-                          id: getTrad('settings.box.logCount-input.error'),
-                          defaultMessage: 'Please enter a value greater than 1',
-                        })
-                      }
+                      error={formatMessage({
+                        id: getTrad('settings.box.logCount-input.error'),
+                        defaultMessage: 'Please enter a value greater than 1',
+                      })}
                       min="1"
                     />
                     <Typography>

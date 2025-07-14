@@ -7,7 +7,7 @@ const fetchLogSettings = async () => {
   return data.settings;
 };
 
-const putLogSettings = async (body) => {
+const putLogSettings = async (body: any) => {
   const { put } = getFetchClient();
   await put(`/${pluginId}/settings`, body);
 };

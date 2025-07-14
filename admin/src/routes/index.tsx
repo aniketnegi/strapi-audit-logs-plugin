@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import LogsPage from '../pages/Logs';
+import LogsPage from '../pages/AuditLogs';
 import SettingsPage from '../pages/Settings';
 
 /**
