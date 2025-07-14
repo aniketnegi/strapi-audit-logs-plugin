@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
@@ -8,7 +9,7 @@ import { Button, Box } from '@strapi/design-system';
 
 import getTrad from '../../../utils/getTrad';
 
-function TableFilters({ displayedFilters }) {
+function TableFilters({ displayedFilters }: { displayedFilters: Array<any> }) {
   const { formatMessage } = useIntl();
 
   return (

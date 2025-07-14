@@ -30,7 +30,7 @@ export default {
           id: `${pluginId}.section.logs`,
           to: `/settings/${pluginId}/logs`,
           async Component() {
-            const component = await import('./pages/Logs'); // TODO
+            const component = await import('./pages/AuditLogs'); // TODO
             return component;
           },
           permissions: [{ action: `plugin::${pluginId}.read`, subject: null }],

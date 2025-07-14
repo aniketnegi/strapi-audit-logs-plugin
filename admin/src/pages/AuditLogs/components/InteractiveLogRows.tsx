@@ -9,10 +9,10 @@ import getTrad from '../../../utils/getTrad';
 
 export interface LogEntry {
   createdAt?: string;
-  documentId: string;
+  documentId?: string;
   http_method?: string;
   http_status?: number;
-  id: number;
+  id?: number;
   ip_address?: string;
   locale?: string;
   publishedAt?: string | null;

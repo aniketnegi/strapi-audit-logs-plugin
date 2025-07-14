@@ -4,8 +4,9 @@ import { useIntl } from 'react-intl';
 import { Flex, TextInput, JSONInput } from '@strapi/design-system';
 
 import getTrad from '../../../utils/getTrad';
+import { LogEntry } from './InteractiveLogRows';
 
-function LogModal({ entry }) {
+function LogModal({ entry }: { entry: LogEntry }) {
   const { formatMessage } = useIntl();
 
   return (
@@ -23,7 +24,7 @@ function LogModal({ entry }) {
           id: getTrad('content.createdat'),
           defaultMessage: 'Date',
         })}
-        value={new Date(entry.createdAt).toUTCString()}
+        value={entry.createdAt && new Date(entry.createdAt).toUTCString()}
         disabled
       />
       <TextInput

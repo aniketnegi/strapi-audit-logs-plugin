@@ -3,7 +3,7 @@ import pluginId from '../../../pluginId';
 
 import { getFetchClient } from '@strapi/strapi/admin';
 
-const fetchLogs = async (queryParams) => {
+const fetchLogs = async (queryParams: any) => {
   // console.log('HI');
   // console.log('Welcome to <fetchLogs>');
   // console.log('Query Params: ', queryParams);
