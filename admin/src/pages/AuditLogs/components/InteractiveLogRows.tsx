@@ -88,7 +88,7 @@ function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {selectedEntry && Object.keys(selectedEntry).length === 0 ? (
+            {selectedEntry ? (
               <LogModal entry={selectedEntry} />
             ) : (
               <Typography>
