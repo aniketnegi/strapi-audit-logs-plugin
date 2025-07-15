@@ -17,7 +17,7 @@ function LogRow({
   return (
     <Tr key={entry.id} onClick={() => onClickHandler(entry)} style={style}>
       {visibleColumns &&
-        visibleColumns
+        (visibleColumns || [])
           .filter((column: any) => column.visible)
           .map((column: any) => (
             <Td>

@@ -28,7 +28,7 @@ import fetchLogs from './utils/api';
 import getTrad from '../../utils/getTrad';
 import InteractiveLogRows, { LogEntry } from './components/InteractiveLogRows';
 import TablePagination from './components/TablePagination';
-import filterSchema from './utils/filterSchema';
+// import filterSchema from './utils/filterSchema';
 import TableFilters from './components/TableFilters';
 
 /* RBAC wrapper */
@@ -259,24 +259,25 @@ const Logs = () => {
             <>
               <Layouts.Content>
                 <Table
-                  colCount={visibleColumns.filter((c) => c.visible).length}
+                  colCount={visibleColumns && visibleColumns.filter((c) => c.visible).length}
                   rowCount={entries.pagination.total}
                 >
                   <Thead>
                     <Tr>
-                      {visibleColumns.map(
-                        ({ id, visible }) =>
-                          visible && (
-                            <Th key={id}>
-                              <Typography variant="sigma">
-                                {formatMessage({
-                                  id: getTrad(`content.${id.toLowerCase()}`),
-                                  defaultMessage: id.replace('_', ' '),
-                                })}
-                              </Typography>
-                            </Th>
-                          )
-                      )}
+                      {visibleColumns &&
+                        visibleColumns.map(
+                          ({ id, visible }) =>
+                            visible && (
+                              <Th key={id}>
+                                <Typography variant="sigma">
+                                  {formatMessage({
+                                    id: getTrad(`content.${id.toLowerCase()}`),
+                                    defaultMessage: id.replace('_', ' '),
+                                  })}
+                                </Typography>
+                              </Th>
+                            )
+                        )}
                     </Tr>
                   </Thead>
                   <InteractiveLogRows entries={entries} visibleColumns={visibleColumns} />
