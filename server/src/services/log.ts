@@ -14,7 +14,7 @@ const LogService = ({ strapi }: { strapi: Core.Strapi }) => ({
       where: query.filters || {},
     };
 
-    console.log('Query Params ::', queryParams);
+    // console.log('Query Params ::', queryParams);
 
     const [results, total] = await Promise.all([
       strapi.db.query(`plugin::${pluginId}.log`).findMany(queryParams),

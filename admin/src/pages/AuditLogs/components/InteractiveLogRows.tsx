@@ -8,7 +8,7 @@ import LogModal from './LogModal';
 import getTrad from '../../../utils/getTrad';
 
 export interface LogEntry {
-  createdAt?: string;
+  createdAt: string | number | Date;
   documentId?: string;
   http_method?: string;
   http_status?: number;
@@ -23,6 +23,10 @@ export interface LogEntry {
   user?: string;
 }
 
+interface VisibleColumn {
+  name: string;
+}
+
 interface InteractiveLogRowsProps {
   entries: {
     pagination: {
@@ -31,14 +35,14 @@ interface InteractiveLogRowsProps {
       pageCount: number;
       total: number;
     };
-    results: Array<LogEntry | null>;
+    results: Array<LogEntry>;
   };
-  visibleColumns: Array<{ id: string; visible: boolean }>;
+  visibleColumns: Array<VisibleColumn>;
 }
 
 function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps) {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedEntry, setSelectedEntry] = useState({});
+  const [selectedEntry, setSelectedEntry] = useState<LogEntry | {}>({});
   const { formatMessage } = useIntl();
 
   const onClickHandler = (entry: any) => {
@@ -47,7 +51,7 @@ function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps
   };
 
   useEffect(() => {
-    console.log('Visible Changed!', selectedEntry);
+    // console.log('Visible Changed!', selectedEntry);
   }, [selectedEntry]);
 
   return (
@@ -83,7 +87,16 @@ function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <LogModal entry={selectedEntry} />
+            {selectedEntry && Object.keys(selectedEntry).length === 0 ? (
+              <LogModal entry={selectedEntry} />
+            ) : (
+              <Typography>
+                {formatMessage({
+                  id: getTrad('content.modal.empty'),
+                  defaultMessage: 'No log entry selected.',
+                })}
+              </Typography>
+            )}
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>

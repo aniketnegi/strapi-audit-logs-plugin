@@ -13,7 +13,7 @@ function TableFilters({ displayedFilters }: { displayedFilters: Array<any> }) {
   const { formatMessage } = useIntl();
 
   return (
-    <Filters.Root schema={displayedFilters}>
+    <Filters.Root schema={displayedFilters && displayedFilters}>
       {/* Trigger MUST be the direct child */}
       <Filters.Trigger asChild>
         <Box paddingTop={1} paddingBottom={1}>

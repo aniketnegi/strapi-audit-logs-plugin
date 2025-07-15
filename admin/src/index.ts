@@ -2,6 +2,9 @@ import { prefixPluginTranslations } from './utils/getTranslation';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
+import AuditLogs from './pages/AuditLogs';
+import Settings from './pages/Settings';
+import { Component } from 'react';
 // import RootWithQueryClient from './RootWithQueryClient';
 
 export default {
@@ -29,10 +32,7 @@ export default {
           },
           id: `${pluginId}.section.logs`,
           to: `/settings/${pluginId}/logs`,
-          async Component() {
-            const component = await import('./pages/AuditLogs'); // TODO
-            return component;
-          },
+          Component: AuditLogs,
           permissions: [{ action: `plugin::${pluginId}.read`, subject: null }],
         },
         {
@@ -42,31 +42,28 @@ export default {
           },
           id: `${pluginId}.section.log-settings`,
           to: `/settings/${pluginId}/settings`,
-          async Component() {
-            const component = await import('./pages/Settings');
-            return component;
-          },
+          Component: Settings,
           permissions: [{ action: `plugin::${pluginId}.settings.read`, subject: null }],
         },
       ]
     );
   },
 
-  async registerTrads({ locales }: { locales: string[] }) {
-    const importedTrads = await Promise.all(
-      locales.map((locale) =>
-        import(/* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`)
-          .then(({ default: data }) => ({
-            data: prefixPluginTranslations(data, pluginId),
-            locale,
-          }))
-          .catch(() => ({
-            data: {},
-            locale,
-          }))
-      )
-    );
+  // async registerTrads({ locales }: { locales: string[] }) {
+  //   const importedTrads = await Promise.all(
+  //     locales.map((locale) =>
+  //       import(/* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`)
+  //         .then(({ default: data }) => ({
+  //           data: prefixPluginTranslations(data, pluginId),
+  //           locale,
+  //         }))
+  //         .catch(() => ({
+  //           data: {},
+  //           locale,
+  //         }))
+  //     )
+  //   );
 
-    return Promise.resolve(importedTrads);
-  },
+  // return Promise.resolve(importedTrads);
+  // },
 };

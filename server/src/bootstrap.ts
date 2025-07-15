@@ -3,7 +3,7 @@ import { pluginId } from './utils/pluginId';
 
 const initLogSettings = async (pluginStore) => {
   const already = await pluginStore.get({ key: 'log-settings' });
-  console.log(already);
+  // console.log(already);
   // if (already) return;
 
   await pluginStore.set({

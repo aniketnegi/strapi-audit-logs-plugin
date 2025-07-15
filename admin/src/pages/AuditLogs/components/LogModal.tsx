@@ -6,7 +6,7 @@ import { Flex, TextInput, JSONInput } from '@strapi/design-system';
 import getTrad from '../../../utils/getTrad';
 import { LogEntry } from './InteractiveLogRows';
 
-function LogModal({ entry }: { entry: LogEntry }) {
+function LogModal({ entry }: { entry: any }) {
   const { formatMessage } = useIntl();
 
   return (

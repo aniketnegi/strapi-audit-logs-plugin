@@ -50,7 +50,7 @@ const Logs = () => {
     'http_status',
     'createdAt',
   ];
-  const [visibleColumns] = useState(initialColumns.map((id) => ({ id, visible: true })));
+  const [visibleColumns] = useState<{ name: string }[]>(initialColumns.map((name) => ({ name })));
   const [{ query: queryParams }, setQuery] = useQueryParams();
   const navigate = useNavigate();
   const { formatMessage } = useIntl();
@@ -208,6 +208,8 @@ const Logs = () => {
     }),
   };
 
+  console.log;
+
   return (
     // @ts-ignore
     <Page.Main labelledBy="title" aria-busy={isFetching}>
@@ -259,25 +261,22 @@ const Logs = () => {
             <>
               <Layouts.Content>
                 <Table
-                  colCount={visibleColumns && visibleColumns.filter((c) => c.visible).length}
+                  colCount={visibleColumns && visibleColumns.length}
                   rowCount={entries.pagination.total}
                 >
                   <Thead>
                     <Tr>
                       {visibleColumns &&
-                        visibleColumns.map(
-                          ({ id, visible }) =>
-                            visible && (
-                              <Th key={id}>
-                                <Typography variant="sigma">
-                                  {formatMessage({
-                                    id: getTrad(`content.${id.toLowerCase()}`),
-                                    defaultMessage: id.replace('_', ' '),
-                                  })}
-                                </Typography>
-                              </Th>
-                            )
-                        )}
+                        visibleColumns.map(({ name }) => (
+                          <Th key={name}>
+                            <Typography variant="sigma">
+                              {formatMessage({
+                                id: getTrad(`content.${name.toLowerCase()}`),
+                                defaultMessage: name.replace('_', ' '),
+                              })}
+                            </Typography>
+                          </Th>
+                        ))}
                     </Tr>
                   </Thead>
                   <InteractiveLogRows entries={entries} visibleColumns={visibleColumns} />
