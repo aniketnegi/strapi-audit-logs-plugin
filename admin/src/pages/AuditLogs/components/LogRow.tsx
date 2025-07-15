@@ -16,17 +16,18 @@ function LogRow({
 }) {
   return (
     <Tr key={entry.id} onClick={() => onClickHandler(entry)} style={style}>
-      {visibleColumns
-        .filter((column: any) => column.visible)
-        .map((column: any) => (
-          <Td>
-            <Typography textColor="neutral800" fontWeight="bold" ellipsis>
-              {column.id === 'createdAt'
-                ? new Date(entry[column.id]).toUTCString()
-                : entry[column.id]}
-            </Typography>
-          </Td>
-        ))}
+      {visibleColumns &&
+        visibleColumns
+          .filter((column: any) => column.visible)
+          .map((column: any) => (
+            <Td>
+              <Typography textColor="neutral800" fontWeight="bold" ellipsis>
+                {column.id === 'createdAt'
+                  ? new Date(entry[column.id]).toUTCString()
+                  : entry[column.id]}
+              </Typography>
+            </Td>
+          ))}
     </Tr>
   );
 }
