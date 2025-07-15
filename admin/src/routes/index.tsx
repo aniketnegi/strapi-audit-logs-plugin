@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import LogsPage from '../pages/AuditLogs';
+import ProtectedLogs from '../pages/AuditLogs';
 import SettingsPage from '../pages/Settings';
 
 /**
@@ -13,10 +13,10 @@ import SettingsPage from '../pages/Settings';
 const PluginRoutes = () => (
   <Routes>
     {/* default → `/plugins/<id>` */}
-    <Route index element={<LogsPage />} />
+    <Route index element={<ProtectedLogs />} />
 
     {/* `/plugins/<id>/settings` */}
-    <Route path="settings" element={<SettingsPage />} />
+    {/* <Route path="settings" element={<SettingsPage />} /> */}
 
     {/* catch-all → redirect */}
     <Route path="*" element={<Navigate to="." replace />} />

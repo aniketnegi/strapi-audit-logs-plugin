@@ -1,7 +1,7 @@
 import { mapValues } from 'lodash';
 import { pluginId } from '../utils/pluginId'; // → default export
 import { Core } from '@strapi/strapi';
-import { LogConfig } from 'src/utils/types';
+import { LogConfig } from '../utils/types';
 
 type Filter<T> = { include?: T[]; exclude?: T[] };
 

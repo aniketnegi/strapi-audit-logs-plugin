@@ -2,10 +2,22 @@ import { prefixPluginTranslations } from './utils/getTranslation';
 import pluginId from './pluginId';
 import Initializer from './components/Initializer';
 import PluginIcon from './components/PluginIcon';
-import AuditLogs from './pages/AuditLogs';
-import Settings from './pages/Settings';
+import ProtectedLogs from './pages/AuditLogs';
+import ProtectedSettings from './pages/Settings';
 import { Component } from 'react';
 // import RootWithQueryClient from './RootWithQueryClient';
+
+const AuditLogs = async () => {
+  const component = await import('./pages/AuditLogs');
+
+  return component;
+};
+
+const Settings = async () => {
+  const component = await import('./pages/Settings');
+
+  return component;
+};
 
 export default {
   register(app: any) {
@@ -49,21 +61,21 @@ export default {
     );
   },
 
-  // async registerTrads({ locales }: { locales: string[] }) {
-  //   const importedTrads = await Promise.all(
-  //     locales.map((locale) =>
-  //       import(/* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`)
-  //         .then(({ default: data }) => ({
-  //           data: prefixPluginTranslations(data, pluginId),
-  //           locale,
-  //         }))
-  //         .catch(() => ({
-  //           data: {},
-  //           locale,
-  //         }))
-  //     )
-  //   );
+  async registerTrads({ locales }: { locales: string[] }) {
+    const importedTrads = await Promise.all(
+      locales.map((locale) =>
+        import(/* webpackChunkName: "translation-[request]" */ `./translations/${locale}.json`)
+          .then(({ default: data }) => ({
+            data: prefixPluginTranslations(data, pluginId),
+            locale,
+          }))
+          .catch(() => ({
+            data: {},
+            locale,
+          }))
+      )
+    );
 
-  // return Promise.resolve(importedTrads);
-  // },
+    return Promise.resolve(importedTrads);
+  },
 };

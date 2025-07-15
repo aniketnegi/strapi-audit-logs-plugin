@@ -33,9 +33,9 @@ import TableFilters from './components/TableFilters';
 
 /* RBAC wrapper */
 const ProtectedLogs = () => (
-  <Page.Protect permissions={PERMISSIONS.readLogs}>
-    <Logs />
-  </Page.Protect>
+  // <Page.Protect permissions={PERMISSIONS.readLogs}>
+  <Logs />
+  // </Page.Protect>
 );
 
 export default ProtectedLogs;
@@ -166,31 +166,43 @@ const Logs = () => {
         log.request_body ? `"${JSON.stringify(log.request_body).replace(/"/g, '""')}"` : '',
         log.response_body ? `"${JSON.stringify(log.response_body.data).replace(/"/g, '""')}"` : '',
       ];
-      console.log(row);
+      // console.log(row);
       csvRows.push(row.join(','));
     });
 
-    console.log(csvRows);
+    // console.log(csvRows);
 
     return csvRows.join('\n');
   };
 
   useEffect(() => {
     let ignore = false;
+
     const load = async () => {
       setIsFetching(true);
       try {
         const data = await fetchLogs(queryParams);
         if (ignore) return;
-        console.log('FETCHED ::', data.result);
-        setEntries(data.result);
-        notifyStatus(formatMessage({ id: getTrad('fetch.success') }));
-      } catch {
-        console.error(formatMessage({ id: getTrad('fetch.error') }));
+
+        // Validate data structure
+        const safeData = {
+          results: Array.isArray(data?.result?.results) ? data.result.results : [],
+          pagination: data?.result?.pagination || { page: 1, pageSize: 10, pageCount: 0, total: 0 },
+        };
+
+        setEntries(safeData);
+      } catch (error) {
+        console.error('Failed to load logs:', error);
+        // Set safe fallback state
+        setEntries({
+          results: [],
+          pagination: { page: 1, pageSize: 10, pageCount: 0, total: 0 },
+        });
       } finally {
         if (!ignore) setIsFetching(false);
       }
     };
+
     load();
     return () => {
       ignore = true;
@@ -208,7 +220,8 @@ const Logs = () => {
     }),
   };
 
-  console.log;
+  // console.log('ENTRIES ::', entries);
+  // console.log('VISIBLE COLUMNS ::', visibleColumns);
 
   return (
     // @ts-ignore

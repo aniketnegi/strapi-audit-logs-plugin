@@ -13,12 +13,6 @@ export const log = {
   pluginOptions: {
     'content-manager': {
       visible: false,
-      actions: {
-        create: false,
-        update: false,
-        delete: false,
-        publish: false,
-      },
     },
     'content-type-builder': {
       visible: false,

@@ -32,22 +32,22 @@ function TablePagination({
   );
 }
 
-TablePagination.defaultProps = {
-  pagination: {
-    page: 1,
-    pageCount: 0,
-    pageSize: 10,
-    total: 0,
-  },
-};
+// TablePagination.defaultProps = {
+//   pagination: {
+//     page: 1,
+//     pageCount: 0,
+//     pageSize: 10,
+//     total: 0,
+//   },
+// };
 
-TablePagination.propTypes = {
-  pagination: PropTypes.shape({
-    page: PropTypes.number,
-    pageCount: PropTypes.number,
-    pageSize: PropTypes.number,
-    total: PropTypes.number,
-  }),
-};
+// TablePagination.propTypes = {
+//   pagination: PropTypes.shape({
+//     page: PropTypes.number,
+//     pageCount: PropTypes.number,
+//     pageSize: PropTypes.number,
+//     total: PropTypes.number,
+//   }),
+// };
 
 export default TablePagination;

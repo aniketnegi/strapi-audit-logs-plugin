@@ -6,6 +6,7 @@ import { Modal, Typography } from '@strapi/design-system';
 import LogRow from './LogRow';
 import LogModal from './LogModal';
 import getTrad from '../../../utils/getTrad';
+import { Tbody } from '@strapi/design-system';
 
 export interface LogEntry {
   createdAt: string | number | Date;
@@ -55,7 +56,7 @@ function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps
   }, [selectedEntry]);
 
   return (
-    <>
+    <Tbody>
       {entries &&
         entries.results.map((entry, idx) => (
           <LogRow
@@ -100,7 +101,7 @@ function InteractiveLogRows({ entries, visibleColumns }: InteractiveLogRowsProps
           </Modal.Body>
         </Modal.Content>
       </Modal.Root>
-    </>
+    </Tbody>
   );
 }
 

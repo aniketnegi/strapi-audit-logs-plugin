@@ -1,6 +1,6 @@
 import { pluginId } from '../utils/pluginId';
 import { Core } from '@strapi/strapi';
-import type { LogAge, LogSettings } from 'src/utils/types';
+import type { LogAge, LogSettings } from '../utils/types';
 
 const checkLogAge = async (logAge: LogAge, { strapi }) => {
   const cutoffDate = new Date();

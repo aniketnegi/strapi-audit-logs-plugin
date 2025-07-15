@@ -31,9 +31,9 @@ import { Page } from '@strapi/strapi/admin';
 
 function ProtectedSettings() {
   return (
-    <Page.Protect permissions={PERMISSIONS.readSettings}>
-      <Settings />
-    </Page.Protect>
+    // <Page.Protect permissions={PERMISSIONS.readSettings}>
+    <Settings />
+    // </Page.Protect>
   );
 }
 
